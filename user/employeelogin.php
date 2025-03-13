@@ -143,7 +143,7 @@ mysqli_close($connection);
     <div class="form-container wow animate__animated animate__zoomIn" data-wow-delay="0.5s">
         <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
             <img src="img/SRCLogoNB.png" alt="SRC Logo" style="width: 50px; height: auto;">
-            <h2 style="margin: 0;">Employee Log In</h2>
+            <h2 style="margin: 0;">Log In</h2>
         </div>
         <form id="loginForm" method="POST" action="">
             <input type="text" name="EmployeeID" placeholder="Employee ID" required>
