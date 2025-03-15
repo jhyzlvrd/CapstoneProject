@@ -94,12 +94,14 @@ if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
                                 '<?php echo addslashes($results['FullName']); ?>',
                                 '<?php echo addslashes($results['EmployeeID']); ?>',
                                 '<?php echo addslashes($results['Email']); ?>',
+                                '<?php echo addslashes($results['Date_time']); ?>',
                                 '<?php echo addslashes($results['Subject']); ?>',
-                                '<?php echo addslashes($results['Specific_problem']); ?>',
+                                '<?php echo addslashes($results['Remarks']); ?>',
                                 '<?php echo addslashes($results['Department']); ?>',
                                 '<?php echo addslashes($results['Location']); ?>',
                                 '<?php echo addslashes($results['c_user']); ?>',
-                                '<?php echo addslashes($results['Remarks']); ?>'
+                                '<?php echo addslashes($results['Asset_tag']); ?>',
+                                '<?php echo addslashes($results['Specific_problem']); ?>'
                             )" data-bs-toggle="modal" data-bs-target="#editComplaintModal">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
@@ -163,6 +165,11 @@ if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="editDateTime" class="form-label">Date and Time</label>
+                                    <input type="datetime-local" class="form-control" id="editDateTime" name="Date and Time">
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="editSubject" class="form-label">Subject</label>
                                     <input type="text" class="form-control" id="editSubject" name="Subject" required>
                                 </div>
@@ -186,16 +193,22 @@ if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="editRemarks" class="form-label">Remarks</label>
-                                    <textarea class="form-control" id="editRemarks" name="Remarks" rows="2"></textarea>
+                                    <label for="editAssetTag" class="form-label">Asset Tag</label>
+                                    <input type="text" class="form-control" id="editAssetTag" name="Asset Tag">
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="editSpecificProblem" class="form-label">Specific Problem</label>
+                                    <input type="text" class="form-control" id="editSpecificProblem" name="Specific_problem">
+                                </div>
+
                             </div>
                         </div>
 
                         <!-- Full Width Fields -->
                         <div class="mb-3">
-                            <label for="editSpecificProblem" class="form-label">Specific Problem</label>
-                            <textarea class="form-control" id="editSpecificProblem" name="Specific_problem"
+                            <label for="editRemarks" class="form-label">Remarks</label>
+                            <textarea class="form-control" id="editRemarks" name="Remarks"
                                 rows="2"></textarea>
                         </div>
 
@@ -224,17 +237,19 @@ if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
     </script>
 
     <script>
-        function editComplaint(id, fullName, employeeID, email, subject, specificProblem, department, location, currentUser, remarks) {
+        function editComplaint(id, fullName, employeeID, email, dateTime, subject, remarks, department, location, currentUser, assetTag, specificProblem) {
             document.getElementById("editID").value = id;
             document.getElementById("editFullName").value = fullName;
             document.getElementById("editEmployeeID").value = employeeID;
             document.getElementById("editEmail").value = email;
+            document.getElementById("editDateTime").value = dateTime;
             document.getElementById("editSubject").value = subject;
-            document.getElementById("editSpecificProblem").value = specificProblem;
+            document.getElementById("editRemarks").value = remarks;
             document.getElementById("editDepartment").value = department;
             document.getElementById("editLocation").value = location;
             document.getElementById("editCurrentUser").value = currentUser;
-            document.getElementById("editRemarks").value = remarks;
+            document.getElementById("editAssetTag").value = assetTag;
+            document.getElementById("editSpecificProblem").value = specificProblem;
         }
 
     </script>
