@@ -20,10 +20,10 @@ if (!$sqlReports) {
 
 if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
     $deleteID = mysqli_real_escape_string($connection, $_POST['deleteID']);
-    
+
     // SQL query to delete the report
     $deleteQuery = "DELETE FROM srccapstoneproject.reports WHERE ID = '$deleteID'";
-    
+
     if (mysqli_query($connection, $deleteQuery)) {
         echo "<script>alert('Report deleted successfully!'); window.location.href='complaints.php';</script>";
     } else {
@@ -65,77 +65,68 @@ if (isset($_POST['delete']) && isset($_POST['deleteID'])) {
             </form>
 
             <!-- Reports Displayed as Boxes -->
-            <div class="accordion" id="reportsAccordion">
-                <?php while ($results = mysqli_fetch_assoc($sqlReports)) { ?>
-                    <div class="accordion-item shadow-sm border rounded mb-2">
-                        <h2 class="accordion-header" id="heading<?php echo $results['ID']; ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse<?php echo $results['ID']; ?>" aria-expanded="false"
-                                aria-controls="collapse<?php echo $results['ID']; ?>">
-                                <strong><?php echo htmlspecialchars($results['Subject']); ?></strong> -
-                                <?php echo htmlspecialchars($results['FullName']); ?>
-                                (<?php echo htmlspecialchars($results['Department']); ?>)
-                            </button>
-                        </h2>
-                        <div id="collapse<?php echo $results['ID']; ?>" class="accordion-collapse collapse"
-                            aria-labelledby="heading<?php echo $results['ID']; ?>" data-bs-parent="#reportsAccordion">
-                            <div class="accordion-body" id="printSection<?php echo $results['ID']; ?>">
-                                <p><strong>Complainant:</strong> <?php echo htmlspecialchars($results['FullName']); ?></p>
-                                <p><strong>Employee ID:</strong> <?php echo htmlspecialchars($results['EmployeeID']); ?></p>
-                                <p><strong>Email:</strong> <?php echo htmlspecialchars($results['Email']); ?></p>
-                                <p><strong>Date and Time:</strong> <?php echo htmlspecialchars($results['Date_time']); ?>
-                                </p>
-                                <p><strong>Asset Tag:</strong> <?php echo htmlspecialchars($results['Asset_tag']); ?></p>
-                                <p><strong>Subject:</strong> <?php echo htmlspecialchars($results['Subject']); ?></p>
-                                <p><strong>Specific Problem:</strong>
-                                    <?php echo htmlspecialchars($results['Specific_problem']); ?></p>
-                                <p><strong>Department:</strong> <?php echo htmlspecialchars($results['Department']); ?></p>
-                                <p><strong>Location:</strong> <?php echo htmlspecialchars($results['Location']); ?></p>
-                                <p><strong>Current User:</strong> <?php echo htmlspecialchars($results['c_user']); ?></p>
-                                <p><strong>Remarks:</strong> <?php echo htmlspecialchars($results['Remarks']); ?></p>
-
-                                <!-- Action Buttons -->
-                                <div class="d-flex gap-2">
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="editID"
-                                            value="<?php echo htmlspecialchars($results['ID']); ?>">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Complainant</th>
+                            <th>Email</th>
+                            <th>Date and Time</th>
+                            <th>Specific Problem</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($results = mysqli_fetch_assoc($sqlReports)) { ?>
+                            <tr>
+                                <td><strong><?php echo htmlspecialchars($results['Subject']); ?></strong></td>
+                                <td><?php echo htmlspecialchars($results['FullName']); ?></td>
+                                <td><?php echo htmlspecialchars($results['Email']); ?></td>
+                                <td><?php echo htmlspecialchars($results['Date_time']); ?></td>
+                                <td><?php echo htmlspecialchars($results['Specific_problem']); ?></td>
+                                <td><?php echo htmlspecialchars($results['Location']); ?></td>
+                                <td>
+                                    <div class="d-flex gap-2">
                                         <button class="btn btn-sm btn-outline-primary" type="button" onclick="editComplaint(
-        '<?php echo $results['ID']; ?>',
-        '<?php echo addslashes($results['FullName']); ?>',
-        '<?php echo addslashes($results['EmployeeID']); ?>',
-        '<?php echo addslashes($results['Email']); ?>',
-        '<?php echo addslashes($results['Subject']); ?>',
-        '<?php echo addslashes($results['Specific_problem']); ?>',
-        '<?php echo addslashes($results['Department']); ?>',
-        '<?php echo addslashes($results['Location']); ?>',
-        '<?php echo addslashes($results['c_user']); ?>',
-        '<?php echo addslashes($results['Remarks']); ?>'
-    )" data-bs-toggle="modal" data-bs-target="#editComplaintModal">
+                                '<?php echo $results['ID']; ?>',
+                                '<?php echo addslashes($results['FullName']); ?>',
+                                '<?php echo addslashes($results['EmployeeID']); ?>',
+                                '<?php echo addslashes($results['Email']); ?>',
+                                '<?php echo addslashes($results['Subject']); ?>',
+                                '<?php echo addslashes($results['Specific_problem']); ?>',
+                                '<?php echo addslashes($results['Department']); ?>',
+                                '<?php echo addslashes($results['Location']); ?>',
+                                '<?php echo addslashes($results['c_user']); ?>',
+                                '<?php echo addslashes($results['Remarks']); ?>'
+                            )" data-bs-toggle="modal" data-bs-target="#editComplaintModal">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
 
-                                    </form>
-                                    <form method="post"
-                                        onsubmit="return confirm('Are you sure you want to delete this report?');">
-                                        <input type="hidden" name="deleteID"
-                                            value="<?php echo htmlspecialchars($results['ID']); ?>">
-                                        <button class="btn btn-sm btn-outline-danger" type="submit" name="delete"><i
-                                                class="fas fa-trash"></i> Delete</button>
-                                    </form>
+                                        <form method="post"
+                                            onsubmit="return confirm('Are you sure you want to delete this report?');">
+                                            <input type="hidden" name="deleteID"
+                                                value="<?php echo htmlspecialchars($results['ID']); ?>">
+                                            <button class="btn btn-sm btn-outline-danger" type="submit" name="delete">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
 
-                                    <button class="btn btn-sm btn-outline-success"
-                                        onclick="printReport(<?php echo $results['ID']; ?>)"><i class="fas fa-print"></i>
-                                        Print</button>
-                                    <a href="../PHPMailer/index.php?email=<?php echo urlencode($results['Email']); ?>&subject=<?php echo urlencode($results['Subject']); ?>&name=<?php echo urlencode($results['FullName']); ?>&date=<?php echo urlencode($results['Date_time']); ?>"
-                                        class="btn btn-sm btn-outline-info">
-                                        <i class="fas fa-envelope"></i> Email
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+                                        <button class="btn btn-sm btn-outline-success"
+                                            onclick="printReport(<?php echo $results['ID']; ?>)">
+                                            <i class="fas fa-print"></i> Print
+                                        </button>
+                                        <a href="../PHPMailer/index.php?email=<?php echo urlencode($results['Email']); ?>&subject=<?php echo urlencode($results['Subject']); ?>&name=<?php echo urlencode($results['FullName']); ?>&date=<?php echo urlencode($results['Date_time']); ?>"
+                                            class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-envelope"></i> Email
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

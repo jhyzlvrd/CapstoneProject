@@ -204,18 +204,18 @@ require_once("../config/database.php");
                 <label for="location">Location:</label>
                 <select id="location" name="location" required>
                     <option value="" disabled selected>Select Location</option>
-                    <option value="Administration">College Faculty</option>
-                    <option value="College">Library</option>
-                    <option value="Senior HighSchool">Canteen</option>
-                    <option value="Junior HighSchool">Computer Lab A</option>
-                    <option value="Elementary">Computer Lab B</option>
+                    <option value="College Faculty">College Faculty</option>
+                    <option value="Library">Library</option>
+                    <option value="Canteen">Canteen</option>
+                    <option value="Computer Lab A">Computer Lab A</option>
+                    <option value="Computer Lab B">Computer Lab B</option>
                 </select>
             </div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="currentUser">Current User:</label>
                 <input type="text" id="currentUser" name="currentUser" required>
-            </div> -->
+            </div>
 
             <div class="form-group">
                 <label for="remarks">Remarks:</label>
