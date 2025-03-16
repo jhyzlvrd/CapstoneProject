@@ -98,7 +98,7 @@
                                 <h1 class="display-3 text-white animated slideInDown">Building a Safer, Smarter Santa Rita College.</h1>
                                 <!-- <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p> -->
                                 <a href="servicereq.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Service Request</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve Facility/Equipment</a>
+                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve Facility</a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                                 <h1 class="display-3 text-white animated slideInDown">Quick Reports, Faster Actions, Better Campus Life.</h1>
                                 <!-- <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p> -->
                                 <a href="servicereq.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Service Request</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve Facility/Equipment</a>
+                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve Facility</a>
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="img/SRC.jpg" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="img/newSRC.jpg" alt="" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -155,40 +155,20 @@
                 <h6 class="section-title bg-white text-center text-primary px-3">MIS OFFICE</h6>
                 <h1 class="mb-5">Service Offered</h1>
             </div>
-            <div class="row g-3">
-                <div class="col-lg-7 col-md-6">
-                    <div class="row g-3">
-                        <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                            <a class="position-relative d-block overflow-hidden" href="servicereq.php">
-                                <img class="img-fluid" src="img/servicereq.jpg" alt="">
-                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                    <h5 class="m-0">Service Request</h5>
-                                </div>
-                            </a>
+            <div class="row g-3 justify-content-center">
+                <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.1s">
+                    <a class="position-relative d-block overflow-hidden" href="servicereq.php">
+                        <img class="img-fluid w-100" src="img/servicereq.jpg" alt="">
+                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                            <h5 class="m-0">Service Request</h5>
                         </div>
-                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                            <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="img/Facilities2.png" alt="">
-                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                    <h5 class="m-0">Reserve Facility</h5>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                            <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="img/Equipments2.png" alt="">
-                                <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                    <h5 class="m-0">Borrow Equipment</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
-                    <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100" src="img/Facilities.jpg" alt="" style="object-fit: cover;">
-                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin:  1px;">
-                            <h5 class="m-0">Check Facilities</h5>
+                <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <a class="position-relative d-block overflow-hidden" href="reservefacility.php">
+                        <img class="img-fluid w-100" src="img/Facilities2.png" alt="">
+                        <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                            <h5 class="m-0">Reserve Facility</h5>
                         </div>
                     </a>
                 </div>

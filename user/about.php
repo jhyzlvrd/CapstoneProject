@@ -1,5 +1,5 @@
-<!DOCTYPE php>
-<php lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/SRCLogoNB.png" rel="icon">
+    <link rel="shortcut icon" href="img/SRCLogoNB.png" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,4 +145,4 @@
     <script src="js/main.js"></script>
 </body>
 
-</php>
+</html>
