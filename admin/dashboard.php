@@ -15,107 +15,130 @@ $rowReports = mysqli_fetch_assoc($resultReports);
 $total_reports = $rowReports['total_reports'];
 ?>
 
-<style>
-    body {
-        background-image: url("img/RSbg2.jpg"); no-repeat center center fixed;
-        background-size: cover;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    .dashboard-container {
-        background-image: url("img/RSbg2.jpg");
-        background-size: cover;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 90vh;
-        text-align: center;
-        margin-top: -30px;
-    }
-
-    .dashboard-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: purple;
-        margin-bottom: 20px;
-    }
-
-    .stats-boxes {
-        display: flex;
-        gap: 20px;
-    }
-
-    .stats-box {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 200px;
-    }
-
-    .stats-box h2 {
-        font-size: 40px;
-        margin: 0;
-        color: black;
-    }
-
-    .stats-box p {
-        font-size: 14px;
-        color: purple;
-        font-weight: bold;
-    }
-
-    .stats-box a {
-        display: inline-block;
-        margin-top: 10px;
-        font-size: 14px;
-        color: black;
-        text-decoration: none;
-    }
-</style>
-
-<div class="dashboard-container">
-    <div class="dashboard-title"><h1>Requisition Management System</h1></div>
-
-    <div class="stats-boxes">
-        <div class="stats-box">
-            <h2>0</h2>
-            <p>Facility Reservation</p>
-            <a href="#">View Details ▶</a>
-        </div>
-
-        <div class="stats-box">
-            <h2><?php echo $total_reports; ?></h2>
-            <p>Service Request</p>
-            <a href="Complaints.php">View Details ▶</a>
-        </div>
-
-        <div class="stats-box">
-            <h2>0</h2>
-            <p>Facility Schedule</p>
-            <a href="#">View Details ▶</a>
-        </div>
-
-        <div class="stats-box">
-            <h2>0</h2>
-            <p>Recent Reservation</p>
-            <a href="#">View Details ▶</a>
-        </div>
-
-        <div class="stats-box">
-            <h2><?php echo $total_employees; ?></h2>
-            <p>Employee Accounts</p>
-            <a href="employeeaccounts.php">View Details ▶</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisition Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            background-image: url("img/RSbg2.jpg");
+            background-size: cover;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: navy;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+        }
+        .stats-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stats-box:hover {
+            transform: scale(1.05);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .stats-box i {
+            font-size: 40px;
+            color: navy;
+            margin-bottom: 10px;
+        }
+        .stats-box h2 {
+            font-size: 40px;
+            margin: 0;
+            color: black;
+        }
+        .stats-box p {
+            font-size: 16px;
+            color: navy;
+            font-weight: bold;
+        }
+        .stats-box a {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .stats-box a:hover {
+            color: turquoise;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="dashboard-container text-center">
+            <h1 class="dashboard-title">Requisition Management System</h1>
+            <div class="row mt-4 g-4 justify-content-center">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stats-box">
+                        <i class="fas fa-calendar-check"></i>
+                        <h2>0</h2>
+                        <p>Facility Reservation</p>
+                        <a href="#">View Details ▶</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stats-box">
+                        <i class="fas fa-tools"></i>
+                        <h2><?php echo $total_reports; ?></h2>
+                        <p>Service Request</p>
+                        <a href="Complaints.php">View Details ▶</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stats-box">
+                        <i class="fas fa-clock"></i>
+                        <h2>0</h2>
+                        <p>Facility Schedule</p>
+                        <a href="#">View Details ▶</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stats-box">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h2>0</h2>
+                        <p>Recent Reservation</p>
+                        <a href="#">View Details ▶</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stats-box">
+                        <i class="fas fa-users"></i>
+                        <h2><?php echo $total_employees; ?></h2>
+                        <p>Employee Accounts</p>
+                        <a href="employeeaccounts.php">View Details ▶</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 <?php include 'includes/footer.php'; ?>
