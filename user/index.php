@@ -1,15 +1,14 @@
 <?php
-session_start();
-require('../config/database.php');
+session_start(); // Start the session
 
-// Check if the employee is logged in
-$greetingMessage = "";
-if (isset($_SESSION['fullName'])) {
-    $greetingMessage = "Welcome, " . htmlspecialchars($_SESSION['fullName']) . "!";
+// Check if user is logged in
+if (isset($_SESSION['FullName'])) {
+    $username = $_SESSION['FullName'];
+    $greetingMessage = "Hello, $username!";
+} else {
+    $greetingMessage = "Welcome to Santa Rita College!";
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +77,7 @@ if (isset($_SESSION['fullName'])) {
                     <div class="dropdown-menu fade-down m-0">
                         <a href="team.php" class="dropdown-item">My History</a>
                         <a href="testimonial.php" class="dropdown-item">Edit Info</a>
-                        <a href="employeelogin.php" class="dropdown-item">Log out</a>
+                        <a href="logout.php" class="dropdown-item" onclick="return confirmLogout()">Log out</a>
                     </div>
                 </div>
 
@@ -250,6 +249,12 @@ if (isset($_SESSION['fullName'])) {
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        function confirmLogout() {
+            return confirm("Are you sure you want to log out?");
+        }
+    </script>
+
 </body>
 
 </html>
