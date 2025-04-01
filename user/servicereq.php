@@ -1,5 +1,43 @@
 <?php
+session_start();
 require_once("../config/database.php");
+
+// Ensure the user is logged in
+if (!isset($_SESSION['EmployeeID'])) {
+    header("Location: login.php"); // Redirect to login if not authenticated
+    exit();
+}
+
+// Get the logged-in employee's ID
+$employeeID = $_SESSION['EmployeeID'];
+
+// Fetch employee details from the database
+$query = "SELECT FullName, EmployeeID, Email, Department FROM srccapstoneproject.employeedb WHERE EmployeeID = ?";
+$stmt = $connection->prepare($query);
+$stmt->bind_param("i", $employeeID);
+$stmt->execute();
+$result = $stmt->get_result();
+$employee = $result->fetch_assoc();
+
+if ($employee) {
+    $fullName = $employee['FullName'];
+    $employeeID = $employee['EmployeeID'];
+    $email = $employee['Email'];
+    $department = $employee['Department']; 
+} else {
+    $fullName = '';
+    $employeeID = '';
+    $email = '';
+    $department = '';
+}
+
+
+// Set the timezone (adjust as needed)
+date_default_timezone_set("Asia/Manila"); // Change this to your region if necessary
+
+// Get current date and time in proper format
+$currentDateTime = date("Y-m-d\TH:i");
+
 ?>
 
 <!DOCTYPE html>
@@ -145,22 +183,25 @@ require_once("../config/database.php");
         <form action="submit_request.php" method="POST">
             <div class="form-group">
                 <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" name="fullName" required>
+                <input type="text" id="fullName" name="fullName" value="<?php echo htmlspecialchars($fullName); ?>"
+                    readonly>
             </div>
 
             <div class="form-group">
                 <label for="employeeID">Employee ID:</label>
-                <input type="number" id="employeeID" name="employeeID" required>
+                <input type="number" id="employeeID" name="employeeID"
+                    value="<?php echo htmlspecialchars($employeeID); ?>" readonly>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
             </div>
 
             <div class="form-group">
                 <label for="date">Date & Time:</label>
-                <input type="datetime-local" id="date" name="date" required>
+                <input type="datetime-local" id="date" name="date"
+                    value="<?php echo htmlspecialchars($currentDateTime); ?>" required readonly>
             </div>
 
             <div class="form-group">
@@ -190,14 +231,8 @@ require_once("../config/database.php");
 
             <div class="form-group">
                 <label for="department">Department:</label>
-                <select id="department" name="department" required>
-                    <option value="" disabled selected>Select Department</option>
-                    <option value="Administration">Administration</option>
-                    <option value="College">College</option>
-                    <option value="Senior HighSchool">Senior High School</option>
-                    <option value="Junior HighSchool">Junior High School</option>
-                    <option value="Elementary">Elementary</option>
-                </select>
+                <input type="text" id="department" name="department"
+                    value="<?php echo htmlspecialchars($department); ?>" readonly>
             </div>
 
             <div class="form-group">

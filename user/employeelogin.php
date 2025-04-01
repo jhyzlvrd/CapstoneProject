@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($employeeID) && !empty($password)) {
         // Prepare the query
-        $query = "SELECT ID, FullName, Password FROM srccapstoneproject.employeedb WHERE EmployeeID = ?";
+        $query = "SELECT ID, FullName, Email, Password FROM srccapstoneproject.employeedb WHERE EmployeeID = ?";
+
         $stmt = $connection->prepare($query);
         $stmt->bind_param("s", $employeeID);
         $stmt->execute();
@@ -20,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $row['Password'])) {
                 $_SESSION['EmployeeID'] = $employeeID;
                 $_SESSION['FullName'] = $row['FullName'];
+                $_SESSION['Email'] = $row['Email'];
+
                 header("Location: index.php");
                 exit();
             } else {
@@ -91,7 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             font-size: 16px;
             transition: 0.3s;
-            margin-bottom: 10px; /* Added space below the button */
+            margin-bottom: 10px;
+            /* Added space below the button */
         }
 
         button:hover {
@@ -139,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script>
-        document.getElementById('togglePassword').addEventListener('change', function() {
+        document.getElementById('togglePassword').addEventListener('change', function () {
             var passwordField = document.getElementById('password');
             passwordField.type = this.checked ? 'text' : 'password';
         });
