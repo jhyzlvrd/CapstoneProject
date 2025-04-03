@@ -11,8 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create'])) {
     $Designation = mysqli_real_escape_string($connection, trim($_POST['Designation']));
     $Department = mysqli_real_escape_string($connection, trim($_POST['Department']));
     $Status = mysqli_real_escape_string($connection, trim($_POST['Status']));
+    $Role = 'User';
     $Password = mysqli_real_escape_string($connection, trim($_POST['Password']));
     $ConfirmPassword = mysqli_real_escape_string($connection, trim($_POST['ConfirmPassword']));
+    
 
     // Validate Full Name
     if (!preg_match('/^[A-Za-z\s]+$/', $FName)) {
@@ -87,9 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create'])) {
     }
 
     // Insert new employee record with email
-    $queryCreate = "INSERT INTO srccapstoneproject.employeedb (FullName, EmployeeID, Email, Gender, Designation, Department, Status, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $queryCreate = "INSERT INTO srccapstoneproject.employeedb (FullName, EmployeeID, Email, Gender, Designation, Department, Status, Role, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     if ($stmt = mysqli_prepare($connection, $queryCreate)) {
-        mysqli_stmt_bind_param($stmt, "ssssssss", $FName, $EmployeeID, $Email, $Gender, $Designation, $Department, $Status, $HashedPassword);
+        mysqli_stmt_bind_param($stmt, "sssssssss", $FName, $EmployeeID, $Email, $Gender, $Designation, $Department, $Status, $Role, $HashedPassword);
 
         if (!mysqli_stmt_execute($stmt)) {
             echo '<script>alert("Registration failed: ' . mysqli_stmt_error($stmt) . '");</script>';

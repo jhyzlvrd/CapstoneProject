@@ -2,7 +2,7 @@
 session_start(); // Start the session
 
 // Check if user is logged in
-if (isset($_SESSION['FullName'])) {
+if (isset($_SESSION['EmployeeID'])) {
     $username = $_SESSION['FullName'];
     $greetingMessage = "Hello, $username!";
 } else {
@@ -72,14 +72,17 @@ if (isset($_SESSION['FullName'])) {
                 <a href="services.php" class="nav-item nav-link">Services</a>
 
                 <a href="contact.php" class="nav-item nav-link">Contact</a>
-                <div class="nav-item dropdown">
-                    <a href="contact.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
-                    <div class="dropdown-menu fade-down m-0">
-                        <a href="team.php" class="dropdown-item">My History</a>
-                        <a href="testimonial.php" class="dropdown-item">Edit Info</a>
-                        <a href="logout.php" class="dropdown-item" onclick="return confirmLogout()">Log out</a>
+                <?php if (isset($_SESSION['FullName'])): ?>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
+                        <div class="dropdown-menu fade-down m-0">
+                            <a href="team.php" class="dropdown-item">My History</a>
+                            <a href="testimonial.php" class="dropdown-item">Edit Info</a>
+                            <a href="logout.php" class="dropdown-item" onclick="return confirmLogout()">Log out</a>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
+
 
                 <!-- </div>
             <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a> -->
