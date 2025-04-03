@@ -3,35 +3,54 @@ session_start();
 require("../config/database.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $employeeID = trim($_POST['EmployeeID']);
+    $loginInput = trim($_POST['loginInput']); // Can be Email (for Admin) or EmployeeID (for User)
     $password = trim($_POST['password']);
 
-    if (!empty($employeeID) && !empty($password)) {
-        // Prepare the query
-        $query = "SELECT ID, FullName, Email, Password FROM srccapstoneproject.employeedb WHERE EmployeeID = ?";
+    if (!empty($loginInput) && !empty($password)) {
+        // Query to check if input matches an Admin's email
+        $adminQuery = "SELECT ID, FullName, Email, Password, Role FROM srccapstoneproject.employeedb WHERE Email = ? AND Role = 'Admin'";
+        $adminStmt = $connection->prepare($adminQuery);
+        $adminStmt->bind_param("s", $loginInput);
+        $adminStmt->execute();
+        $adminResult = $adminStmt->get_result();
 
-        $stmt = $connection->prepare($query);
-        $stmt->bind_param("s", $employeeID);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            // Verify password
+        if ($adminResult->num_rows == 1) {
+            $row = $adminResult->fetch_assoc();
             if (password_verify($password, $row['Password'])) {
-                $_SESSION['EmployeeID'] = $employeeID;
+                // Admin login
+                $_SESSION['EmployeeID'] = $row['ID']; 
                 $_SESSION['FullName'] = $row['FullName'];
                 $_SESSION['Email'] = $row['Email'];
+                $_SESSION['Role'] = $row['Role'];
+
+                header("Location: ../admin/dashboard.php");
+                exit();
+            }
+        }
+
+        // Query to check if input matches a User's EmployeeID
+        $userQuery = "SELECT ID, FullName, Email, Password, Role FROM srccapstoneproject.employeedb WHERE EmployeeID = ? AND Role = 'User'";
+        $userStmt = $connection->prepare($userQuery);
+        $userStmt->bind_param("s", $loginInput);
+        $userStmt->execute();
+        $userResult = $userStmt->get_result();
+
+        if ($userResult->num_rows == 1) {
+            $row = $userResult->fetch_assoc();
+            if (password_verify($password, $row['Password'])) {
+                // User login
+                $_SESSION['EmployeeID'] = $row['ID']; 
+                $_SESSION['FullName'] = $row['FullName'];
+                $_SESSION['Email'] = $row['Email'];
+                $_SESSION['Role'] = $row['Role'];
 
                 header("Location: index.php");
                 exit();
-            } else {
-                echo "<script>alert('Invalid Employee ID or Password!'); window.location.href='employeelogin.php';</script>";
             }
-        } else {
-            echo "<script>alert('Invalid Employee ID or Password!'); window.location.href='employeelogin.php';</script>";
         }
-        $stmt->close();
+
+        // If login fails
+        echo "<script>alert('Invalid Email/Employee ID or Password!'); window.location.href='employeelogin.php';</script>";
     } else {
         echo "<script>alert('All fields are required!'); window.location.href='employeelogin.php';</script>";
     }
@@ -132,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 style="margin: 0;">Log In</h2>
         </div>
         <form id="loginForm" method="POST" action="">
-            <input type="text" name="EmployeeID" placeholder="Employee ID" required>
+            <input type="text" name="loginInput" placeholder="Employee ID" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
             <div class="show-password">
                 <input type="checkbox" id="togglePassword"> Show Password

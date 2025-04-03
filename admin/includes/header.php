@@ -1,3 +1,18 @@
+<?php
+session_start(); // Start the session
+
+// Check if the admin is logged in, otherwise redirect to login page
+if (!isset($_SESSION['Email']) || !isset($_SESSION['FullName'])) {
+    header("Location: ../user/employeelogin.php");
+    exit();
+}
+
+// Get Admin details from the session
+$adminEmail = $_SESSION['Email'];       
+$adminFullName = $_SESSION['FullName']; 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

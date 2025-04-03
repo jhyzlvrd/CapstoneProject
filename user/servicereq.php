@@ -4,7 +4,7 @@ require_once("../config/database.php");
 
 // Ensure the user is logged in
 if (!isset($_SESSION['EmployeeID'])) {
-    header("Location: login.php"); // Redirect to login if not authenticated
+    header("Location: employeelogin.php"); 
     exit();
 }
 
@@ -210,7 +210,7 @@ $currentDateTime = date("Y-m-d\TH:i");
             </div>
 
             <div class="form-group">
-                <label for="subject">Subject:</label>
+                <label for="subject">Concern:</label>
                 <select id="subject" name="subject" required onchange="toggleSpecificProblem()">
                     <option value="" disabled selected>Select Subject</option>
                     <option value="PC">PC</option>
