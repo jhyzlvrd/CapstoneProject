@@ -51,116 +51,321 @@ if (isset($_SESSION['login_error'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Login</title>
-    <link href="img/SRCLogoNB.png" rel="icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Login | Santa Rita College</title>
+    <link href="img/SRCLogoNB.png" rel="icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- FontAwesome link -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url("img/newSRC.jpg") no-repeat center center fixed;
-            background-size: cover;
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent-color: #3EC1B3;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            background-color: var(--bg-light);
+        }
+
+        .container {
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
+            min-height: 600px;
+        }
+
+        .left {
+            flex: 1.2;
+            background: linear-gradient(to bottom right,
+                    rgba(0, 0, 128, 0.4),
+                    rgba(70, 130, 180, 0.5)), url("img/newSRC.jpg") no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 4rem;
+            color: white;
+            position: relative;
+        }
+
+        .left-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .left h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .left p {
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: white;
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-bottom: 25px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 12px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: #5cb85c;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
             width: 100%;
-            font-size: 16px;
-            transition: 0.3s;
-            margin-bottom: 10px;
-            /* Added space below the button */
+            max-width: 420px;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            background-color: #E3F2FD;
+            /* Light Blue Shade */
         }
 
-        button:hover {
-            background-color: #4cae4c;
-        }
-
-        .show-password {
+        .form-header {
             display: flex;
             align-items: center;
-            margin-top: 5px;
-            font-size: 14px;
+            gap: 1rem;
+            margin-bottom: 2rem;
             text-align: left;
         }
 
-        .show-password input {
-            margin-right: 5px;
+        .form-header-content {
+            flex: 1;
+        }
+
+        .form-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 0.95rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            transition: var(--transition);
+            background-color: #f9fafb;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background-color: white;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .left {
+                flex: none;
+                height: 200px;
+                padding: 1.5rem;
+                justify-content: center;
+                background: linear-gradient(to bottom right,
+                        rgba(0, 0, 128, 0.4),
+                        rgba(70, 130, 180, 0.5)), url("img/newSRC.jpg") no-repeat center center;
+                background-size: cover;
+            }
+
+            .left h1 {
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .left p {
+                font-size: 1rem;
+            }
+
+            .right {
+                flex: 1;
+                padding: 1.5rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+                box-shadow: none;
+            }
+
+            .form-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .logo {
+                margin-bottom: 0.5rem;
+            }
         }
     </style>
-
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-    <!-- WOW.js for animation triggers -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
 </head>
 
 <body>
-    <div class="form-container wow animate__animated animate__zoomIn" data-wow-delay="0.5s">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <img src="img/SRCLogoNB.png" alt="SRC Logo" style="width: 50px; height: auto;">
-            <h2 style="margin: 0;">Log In</h2>
-        </div>
-        <form id="loginForm" method="POST" action="">
-            <input type="text" name="loginInput" placeholder="Employee ID" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <div class="show-password">
-                <input type="checkbox" id="togglePassword"> Show Password
+    <div class="container">
+        <div class="left">
+            <div class="left-content">
+                <h1>Santa Rita College of Pampanga</h1>
+                <p>Quick Reports, Faster Actions, Better Campus Life.</p>
             </div>
-            <br>
-            <button type="submit">Login</button>
-        </form>
+        </div>
+
+        <div class="right">
+            <div class="form-container">
+                <div class="form-header">
+                    <img src="img/SRCLogoNB.png" alt="SRC Logo" class="logo" />
+                    <div class="form-header-content">
+                        <h2>Welcome Back!</h2>
+                        <p>Sign in to your employee account</p>
+                    </div>
+                </div>
+
+                <form id="loginForm" method="POST" action="">
+                    <div class="form-group">
+                        <label for="loginInput" class="form-label">Employee ID</label>
+                        <input type="text" name="loginInput" id="loginInput" class="form-input"
+                            placeholder="Enter your employee ID" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" class="form-input"
+                                placeholder="Enter your password" required />
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i> <!-- FontAwesome eye icon -->
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Log In
+                    </button>
+                </form>
+
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('togglePassword').addEventListener('change', function () {
-            document.getElementById('password').type = this.checked ? 'text' : 'password';
-        });
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
 
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
     </script>
 </body>
 
