@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRC Facility Calendar</title>
+  <link rel="shortcut icon" href="img/SRCLogoNB.png" />
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --danger-color: #e74c3c;
+      --success-color: #2ecc71;
+      --text-color: #2c3e50;
+      --light-gray: #ecf0f1;
+      --border-color: #e0e0e0;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 15px;
+      background-color: #f0f2f5;
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+    
+    .calendar-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      overflow: hidden;
+    }
+    
+    .calendar-header {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .month-year {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      order: 1;
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      order: 2;
+    }
+    
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #7f8c8d;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    
+    .day {
+      min-height: 60px;
+      padding: 5px;
+      border-radius: 8px;
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+      font-size: 0.85rem;
+    }
+    
+    .day:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .day-number {
+      font-weight: bold;
+      margin-bottom: 2px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .other-month {
+      color: #bdc3c7;
+      background-color: #f9f9f9;
+    }
+    
+    .current-day {
+      background-color: #e3f2fd;
+      border-color: #bbdefb;
+    }
+    
+    .event {
+      font-size: 0.7rem;
+      padding: 2px 3px;
+      margin: 2px 0;
+      border-radius: 3px;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .event.dome {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    
+    .event.library {
+      background-color: #e3f2fd;
+      color: #1565c0;
+    }
+    
+    .event.lab {
+      background-color: #fff8e1;
+      color: #ff8f00;
+    }
+    
+    .calendar-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .btn {
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      text-align: center;
+      width: 100%;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn.back {
+      background-color: var(--danger-color);
+      order: 2;
+    }
+    
+    .btn.reserve {
+      background-color: var(--success-color);
+      order: 1;
+    }
+    
+    .nav-btn {
+      padding: 8px 12px;
+      background-color: var(--light-gray);
+      color: var(--text-color);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    
+    .today-btn {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 480px) {
+      .calendar-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .month-year {
+        order: 0;
+        text-align: left;
+      }
+      
+      .calendar-footer {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      .btn {
+        width: auto;
+        padding: 10px 20px;
+      }
+      
+      .btn.back {
+        order: 0;
+      }
+      
+      .day {
+        min-height: 80px;
+        padding: 8px;
+      }
+      
+      .event {
+        font-size: 0.75rem;
+        padding: 3px 4px;
+      }
+    }
+    
+    @media (min-width: 600px) {
+      .day {
+        min-height: 100px;
+      }
+      
+      .event {
+        font-size: 0.8rem;
+        padding: 3px 5px;
+      }
+      
+      .weekdays {
+        font-size: 0.9rem;
+      }
+      
+      .day-number {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar-container" id="calendar-container">
+    <!-- Calendar content will be generated by JavaScript -->
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarContainer = document.getElementById('calendar-container');
+      let currentDate = new Date();
+      let currentMonth = currentDate.getMonth();
+      let currentYear = currentDate.getFullYear();
+      
+      // Sample events data
+      const events = {
+        '2025-12-11': [
+          { title: 'SRC Dome 8am-10am', type: 'dome' }
+        ],
+        '2025-12-18': [
+          { title: 'SRC Dome 2pm-5pm', type: 'dome' },
+          { title: 'Library 10am-11:30am', type: 'library' }
+        ],
+        '2025-12-25': [
+          { title: 'Com Lab A 10am-12pm', type: 'lab' }
+        ]
+      };
+      
+      function generateCalendar(month, year) {
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDay = firstDay.getDay();
+        
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        
+        // Calendar header
+        let calendarHTML = `
+          <div class="calendar-header">
+            <div class="month-year">${monthNames[month]} ${year}</div>
+            <div class="navigation">
+              <button class="nav-btn" id="prev-year">«</button>
+              <button class="nav-btn" id="prev-month">‹</button>
+              <button class="nav-btn today-btn" id="today-btn">Today</button>
+              <button class="nav-btn" id="next-month">›</button>
+              <button class="nav-btn" id="next-year">»</button>
+            </div>
+          </div>
+          
+          <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+          
+          <div class="days-grid">
+        `;
+        
+        // Previous month days
+        const prevMonthLastDay = new Date(year, month, 0).getDate();
+        for (let i = 0; i < startingDay; i++) {
+          calendarHTML += `
+            <div class="day other-month">
+              <div class="day-number">${prevMonthLastDay - startingDay + i + 1}</div>
+            </div>
+          `;
+        }
+        
+        // Current month days
+        const today = new Date();
+        for (let i = 1; i <= daysInMonth; i++) {
+          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+          const dayEvents = events[dateStr] || [];
+          const isToday = i === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+          
+          calendarHTML += `
+            <div class="day ${isToday ? 'current-day' : ''}">
+              <div class="day-number">${i}</div>
+              ${dayEvents.map(event => `
+                <div class="event ${event.type}">${event.title}</div>
+              `).join('')}
+            </div>
+          `;
+        }
+        
+        // Next month days
+        const daysShown = startingDay + daysInMonth;
+        const remainingDays = 7 - (daysShown % 7);
+        if (remainingDays < 7) {
+          for (let i = 1; i <= remainingDays; i++) {
+            calendarHTML += `
+              <div class="day other-month">
+                <div class="day-number">${i}</div>
+              </div>
+            `;
+          }
+        }
+        
+        calendarHTML += `
+          </div>
+          <div class="calendar-footer">
+            <a href="facilityreservation.php" class="btn back">Back</a>
+            <a href="#" class="btn reserve">Reserve Facility</a>
+          </div>
+        `;
+        
+        calendarContainer.innerHTML = calendarHTML;
+        
+        // Add event listeners for calendar navigation only
+        document.getElementById('prev-month').addEventListener('click', () => {
+          currentMonth--;
+          if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+          }
+          generateCalendar(currentMonth, currentYear);
+        });
+        
+        document.getElementById('next-month').addEventListener('click', () => {
+          currentMonth++;
+          if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+          }
+          generateCalendar(currentMonth, currentYear);
+        });
+        
+        document.getElementById('prev-year').addEventListener('click', () => {
+          currentYear--;
+          generateCalendar(currentMonth, currentYear);
+        });
+        
+        document.getElementById('next-year').addEventListener('click', () => {
+          currentYear++;
+          generateCalendar(currentMonth, currentYear);
+        });
+        
+        document.getElementById('today-btn').addEventListener('click', () => {
+          currentDate = new Date();
+          currentMonth = currentDate.getMonth();
+          currentYear = currentDate.getFullYear();
+          generateCalendar(currentMonth, currentYear);
+        });
+      }
+      
+      // Initialize calendar
+      generateCalendar(currentMonth, currentYear);
+    });
+  </script>
+</body>
+</html>

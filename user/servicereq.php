@@ -13,7 +13,7 @@ $employeeID = $_SESSION['EmployeeID'];
 
 // Fetch employee details from the database
 $query = "SELECT FullName, EmployeeID, Email, Department FROM srccapstoneproject.employeedb WHERE EmployeeID = ?";
-$stmt = $connection->prepare($query);
+$stmt = $connection->prepare($query);   
 $stmt->bind_param("i", $employeeID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,7 +24,7 @@ if ($employee) {
     $fullName = $employee['FullName'];
     $employeeID = $employee['EmployeeID'];
     $email = $employee['Email'];
-    $department = $employee['Department']; // Ensure this field is fetched properly
+    $department = $employee['Department']; 
 } else {
     $fullName = '';
     $employeeID = '';

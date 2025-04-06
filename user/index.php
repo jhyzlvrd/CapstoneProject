@@ -76,8 +76,8 @@ if (isset($_SESSION['EmployeeID'])) {
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profile</a>
                         <div class="dropdown-menu fade-down m-0">
-                            <a href="team.php" class="dropdown-item">My History</a>
-                            <a href="testimonial.php" class="dropdown-item">Edit Info</a>
+                            <a href="team.php" class="dropdown-item">My Transactions</a>
+                            <a href="testimonial.php" class="dropdown-item">Edit Information</a>
                             <a href="logout.php" class="dropdown-item" onclick="return confirmLogout()">Log out</a>
                         </div>
                     </div>
@@ -103,13 +103,13 @@ if (isset($_SESSION['EmployeeID'])) {
                             <div class="col-sm-10 col-lg-8">
                                 <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Santa Rita College
                                 </h5>
-                                <h1 class="display-3 text-white animated slideInDown">Building a Safer, Smarter Santa
-                                    Rita College.</h1>
-                                <!-- <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p> -->
+                                <h1 class="display-3 text-white animated slideInDown">Quick Reports, Faster Actions,
+                                Better Campus Life.</h1>
+                                <!-- <p class="fs-5 text-white mb-4 pb-2">Your Concern, Our Action.</p> -->
                                 <a href="servicereq.php"
                                     class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Service
                                     Request</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve
+                                <a href="facilityreservation.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve
                                     Facility</a>
                             </div>
                         </div>
@@ -125,13 +125,12 @@ if (isset($_SESSION['EmployeeID'])) {
                             <div class="col-sm-10 col-lg-8">
                                 <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Santa Rita College
                                 </h5>
-                                <h1 class="display-3 text-white animated slideInDown">Quick Reports, Faster Actions,
-                                    Better Campus Life.</h1>
+                                <h1 class="display-3 text-white animated slideInDown">Reserve Your Space, Secure Your Time.</h1>
                                 <!-- <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p> -->
                                 <a href="servicereq.php"
                                     class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Service
                                     Request</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve
+                                <a href="facilityreservation.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reserve
                                     Facility</a>
                             </div>
                         </div>
@@ -198,7 +197,7 @@ if (isset($_SESSION['EmployeeID'])) {
                     </a>
                 </div>
                 <div class="col-lg-6 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-                    <a class="position-relative d-block overflow-hidden" href="reservefacility.php">
+                    <a class="position-relative d-block overflow-hidden" href="facilityreservation.php">
                         <img class="img-fluid w-100" src="img/Facilities2.png" alt="">
                         <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                             style="margin: 1px;">

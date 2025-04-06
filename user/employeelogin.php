@@ -315,8 +315,9 @@ if (isset($_SESSION['login_error'])) {
     <div class="container">
         <div class="left">
             <div class="left-content">
-                <h1>Santa Rita College of Pampanga</h1>
-                <p>Quick Reports, Faster Actions, Better Campus Life.</p>
+                <h1>EasyReq: An Online Requisition Management System for Santa Rita College of Pampanga</h1>
+                <p>Report, Reserve, Resolve.</p>
+                <p>Got a Problem? Need Room? We Got You.</p>
             </div>
         </div>
 
