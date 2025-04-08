@@ -32,20 +32,22 @@ $adminFullName = $_SESSION['FullName'];
 
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="css/style.css">
   
   <!-- Favicon -->
   <link rel="shortcut icon" href="img/SRCLogoNB.png" />
 </head>
 <body>
   <div class="container-scroller">
-    <!-- Sidebar -->
+    <!-- Top navbar -->
     <?php include 'navbar.php'; ?>
-
+    
     <div class="container-fluid page-body-wrapper">
-      <!-- Navbar -->
+      <!-- Fixed Sidebar -->
       <?php include 'sidebar.php'; ?>
-
+      
+      <!-- Scrollable Main Content -->
       <div class="main-panel">
         <div class="content-wrapper">
-
+          <!-- Your content will go here -->
     

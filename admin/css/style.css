@@ -1,0 +1,30 @@
+/* Fix the sidebar position */
+.sidebar {
+    position: fixed;
+    height: 100vh;
+    width: 260px; /* Match this with your sidebar width */
+    overflow-y: auto;
+    z-index: 10;
+    background: #fff; /* Add your sidebar background color */
+  }
+  
+  /* Adjust main content area */
+  .main-panel {
+    margin-left: 260px; /* Same as sidebar width */
+    width: calc(100% - 260px);
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  /* Ensure proper spacing */
+  .content-wrapper {
+    padding: 20px;
+  }
+  
+  /* Optional: Style the scrollbar */
+  .sidebar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #888;
+  }

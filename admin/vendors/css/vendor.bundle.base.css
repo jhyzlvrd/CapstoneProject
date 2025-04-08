@@ -9,6 +9,11 @@
   -ms-touch-action: auto;
 }
 
+.sidebar-offcanvas {
+  position: static !important;
+  height: 100% !important;
+}
+
 /*
  * Scrollbar rail styles
  */

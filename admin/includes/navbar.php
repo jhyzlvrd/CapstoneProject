@@ -5,7 +5,11 @@
     <a class="navbar-brand brand-logo-mini" href="index.html"><img src="img/SRCLogoNB.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+    <button class="navbar-toggler navbar-toggler align-self-center sidebar-toggle d-lg-none" type="button">
+      <span class="icon-menu"></span>
+    </button>
+    <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button"
+      data-toggle="minimize">
       <span class="icon-menu"></span>
     </button>
     <ul class="navbar-nav mr-lg-2">
@@ -100,10 +104,64 @@
 </nav>
 
 <script>
-function confirmLogout() {
-  let confirmAction = confirm("Are you sure you want to log out?");
-  if (confirmAction) {
-    window.location.href = "../admin/logout.php";
+  // Existing logout function
+  function confirmLogout() {
+    let confirmAction = confirm("Are you sure you want to log out?");
+    if (confirmAction) {
+      window.location.href = "../admin/logout.php";
+    }
   }
-}
+
+  // New sidebar toggle functionality
+  document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    const toggleBtns = document.querySelectorAll('.sidebar-toggle');
+
+    // Toggle sidebar for all toggle buttons
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        sidebarOverlay.classList.toggle('active');
+        document.body.classList.toggle('sidebar-active');
+      });
+    });
+
+    // Close sidebar when clicking overlay
+    sidebarOverlay?.addEventListener('click', function () {
+      sidebar.classList.remove('active');
+      this.classList.remove('active');
+      document.body.classList.remove('sidebar-active');
+    });
+
+    // Close sidebar when clicking a nav link (mobile only)
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        if (window.innerWidth < 992) {
+          sidebar.classList.remove('active');
+          sidebarOverlay.classList.remove('active');
+          document.body.classList.remove('sidebar-active');
+        }
+      });
+    });
+  });
+
+  // Toggle sidebar function
+  function toggleSidebar() {
+    const body = document.body;
+    const sidebar = document.querySelector('.sidebar');
+
+    if (window.innerWidth >= 992) { // Desktop
+      body.classList.toggle('sidebar-minimized');
+      sidebar.classList.toggle('minimized');
+    } else { // Mobile
+      body.classList.toggle('sidebar-hidden');
+      sidebar.classList.toggle('hidden');
+    }
+  }
+
+  // Add event listener to your toggle button
+  document.querySelector('.sidebar-toggle').addEventListener('click', toggleSidebar);
+
+
 </script>
