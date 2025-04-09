@@ -18,12 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $result->fetch_assoc();
 
             if (password_verify($password, $row['Password'])) {
+                // Regenerate the session ID to avoid session fixation attacks
+                session_regenerate_id(true);  // Generates a new session ID
+
+                // Clear any previous session data (for cleanliness)
+                $_SESSION = [];
+
                 // Set session variables
                 $_SESSION['EmployeeID'] = $row['EmployeeID'];
                 $_SESSION['FullName'] = $row['FullName'];
                 $_SESSION['Email'] = $row['Email'];
                 $_SESSION['Role'] = $row['Role'];
-
+            
                 // Redirect based on role
                 if ($row['Role'] == 'Admin') {
                     header("Location: ../admin/dashboard.php");
@@ -31,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: index.php");
                 }
                 exit();
-            }
+            }            
         }
 
-        // Store error message in session
+        // Store error message in session if login fails
         $_SESSION['login_error'] = "Invalid Employee ID or Password!";
         header("Location: employeelogin.php");
         exit();
@@ -50,6 +56,7 @@ if (isset($_SESSION['login_error'])) {
     unset($_SESSION['login_error']);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

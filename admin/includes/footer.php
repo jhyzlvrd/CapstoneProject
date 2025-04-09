@@ -1,3 +1,8 @@
+</div> <!-- content-wrapper -->
+</div> <!-- main-panel -->
+</div> <!-- page-body-wrapper -->
+</div> <!-- container-scroller -->
+
 <footer class="footer">
   <div class="d-sm-flex justify-content-center justify-content-sm-between">
     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
@@ -16,10 +21,6 @@
   </div>
 </footer>
 
-</div> <!-- content-wrapper -->
-</div> <!-- main-panel -->
-</div> <!-- page-body-wrapper -->
-</div> <!-- container-scroller -->
 
 <!-- plugins:js -->
 <script src="vendors/js/vendor.bundle.base.js"></script>

@@ -1,6 +1,11 @@
 <?php
-session_start();
+session_start(); // Start the session
+
+// Destroy all session data
+session_unset();
 session_destroy();
-header("Location: employeelogin.php"); // Redirect to home after logout
+
+// Redirect to login page after logout
+header("Location: employeelogin.php");
 exit();
 ?>

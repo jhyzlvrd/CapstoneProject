@@ -1,30 +1,60 @@
-/* Fix the sidebar position */
-.sidebar {
+/* Sidebar Transition Effects */
+.sidebar-offcanvas {
+  transition: all 0.3s ease;
+}
+
+/* Collapsed State Styles */
+.sidebar-icon-only .sidebar-offcanvas {
+  width: 70px;
+}
+
+.sidebar-icon-only .sidebar-offcanvas .nav-item .menu-title,
+.sidebar-icon-only .sidebar-offcanvas .nav-item .menu-arrow,
+.sidebar-icon-only .sidebar-offcanvas .nav-item .sub-menu {
+  display: none;
+}
+
+.sidebar-icon-only .sidebar-offcanvas .nav-item .nav-link {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.sidebar-icon-only .sidebar-offcanvas .nav-item .menu-icon {
+  margin-right: 0;
+}
+
+/* Main Panel Adjustment */
+.sidebar-icon-only ~ .main-panel {
+  width: calc(100% - 70px);
+  margin-left: 70px;
+  transition: all 0.3s ease;
+}
+
+/* For mobile view */
+@media (max-width: 991px) {
+  .sidebar-offcanvas {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
     height: 100vh;
-    width: 260px; /* Match this with your sidebar width */
-    overflow-y: auto;
-    z-index: 10;
-    background: #fff; /* Add your sidebar background color */
+    background-color: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1040;
+    margin-top: 0; /* override any previous margins */
   }
-  
-  /* Adjust main content area */
+
+  .sidebar-offcanvas.show {
+    transform: translateX(0);
+  }
+
   .main-panel {
-    margin-left: 260px; /* Same as sidebar width */
-    width: calc(100% - 260px);
-    height: 100vh;
-    overflow-y: auto;
+    margin-left: 0 !important;
   }
-  
-  /* Ensure proper spacing */
-  .content-wrapper {
-    padding: 20px;
+
+  .sidebar .nav {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  /* Optional: Style the scrollbar */
-  .sidebar::-webkit-scrollbar {
-    width: 5px;
-  }
-  .sidebar::-webkit-scrollbar-thumb {
-    background: #888;
-  }
+}

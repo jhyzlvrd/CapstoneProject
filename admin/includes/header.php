@@ -1,17 +1,16 @@
 <?php
 session_start(); // Start the session
 
-// Check if the admin is logged in, otherwise redirect to login page
-if (!isset($_SESSION['Email']) || !isset($_SESSION['FullName'])) {
-    header("Location: ../user/employeelogin.php");
-    exit();
+// Check if session is not set, if not, redirect to login
+if (!isset($_SESSION['EmployeeID']) || !isset($_SESSION['Role'])) {
+  header("Location: ../user/employeelogin.php");
+  exit();
 }
 
 // Get Admin details from the session
 $adminEmail = $_SESSION['Email'];       
 $adminFullName = $_SESSION['FullName']; 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +31,40 @@ $adminFullName = $_SESSION['FullName'];
 
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
-  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- <style>
+    .sidebar-offcanvas {
+      position: fixed;
+      top: 70px;
+      bottom: 0;
+      left: 0;
+      width: 240px; 
+      overflow-y: hidden; 
+      z-index: 100;
+      background: #fff; 
+    }
+    
+    .main-panel {
+      margin-left: 240px; 
+      width: calc(100% - 240px);
+      height: 100vh;
+      overflow-y: auto;
+    }
+    
+    @media (max-width: 991px) {
+      .sidebar-offcanvas {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .sidebar-offcanvas.show {
+        transform: translateX(0);
+      }
+      .main-panel {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style> -->
   
   <!-- Favicon -->
   <link rel="shortcut icon" href="img/SRCLogoNB.png" />
@@ -50,4 +82,3 @@ $adminFullName = $_SESSION['FullName'];
       <div class="main-panel">
         <div class="content-wrapper">
           <!-- Your content will go here -->
-    
